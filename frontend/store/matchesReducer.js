@@ -37,7 +37,7 @@ export const matchesSlice = createSlice({
 })
 
 async function fetchMatches(name) {
-  // console.log("fetching...")
+  console.log("fetching matches")
   const res = await fetch(`/riot/${name}`, {
     method: "GET",
     headers: {
@@ -45,7 +45,7 @@ async function fetchMatches(name) {
     }
   })
   const thing = await res.json()
-  // console.log("res: ", thing)
+  console.log("Matches res", thing)
   return thing
 }
 
