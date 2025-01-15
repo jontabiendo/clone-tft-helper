@@ -38,7 +38,7 @@ export const matchesSlice = createSlice({
 
 async function fetchMatches(name) {
   console.log("fetching matches")
-  const res = await fetch(process.env.NODE_ENV === "development" ? `/riot/${name}` : `http://clone-tft-helper.onrender.com/riot/${name}`, {
+  const res = await fetch(`/riot/${name}`, {
     method: "GET",
     headers: {
       'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ export const updateSummoner = createAsyncThunk(
   UPDATE_SUMMONER,
   async (name, thunkApi) => {
     // console.log('fetching update summoner')
-    const res = await fetch(process.env.NODE_ENV === "development" ? `/riot/update/${name}` : `http://clone-tft-helper.onrender.com/riot/update/${name}`, {
+    const res = await fetch(`/riot/update/${name}`, {
       method: "GET",
       headers: {
         'Content-Type': 'application/json'
