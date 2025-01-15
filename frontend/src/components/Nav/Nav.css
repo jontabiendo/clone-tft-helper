@@ -1,0 +1,35 @@
+#nav {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+  width: 1839
+  px;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #254441;
+}
+
+#nav-title {
+  color: #C89B3C;
+  margin: 1rem;
+}
+
+#search-div {
+  margin: 1rem;
+}
+
+#search {
+  margin-right: 1rem;
+  background-color: #254441;
+  color: #EEE5E9;
+  border-radius: 1rem;
+}
+
+/* #search:focus {
+  margin-right: 1rem;
+  background-color: #254441;
+  color: #EEE5E9;
+} */

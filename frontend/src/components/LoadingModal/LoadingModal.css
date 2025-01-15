@@ -1,0 +1,25 @@
+.pengu-loading-div {
+  position: absolute;
+  /* width: 60vw; */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: gray;
+}
+
+.pengu-loading-div > img {
+  width: 20vw;
+  background: transparent;
+
+}
+
+#modal-loading-text {
+  background-color: #EEE5E9;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+}
