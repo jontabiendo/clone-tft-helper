@@ -46,7 +46,7 @@ async function fetchMatches(name) {
   })
   console.log("res: ", res)
   // const thing = await res.json()
-  return res.json()
+  return res
 }
 
 export const getMatches = createAsyncThunk(
