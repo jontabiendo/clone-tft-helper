@@ -36,6 +36,7 @@ function Nav() {
         navigate(`/summoner`)
       });
     } catch (e) {
+      console.log(e)
       setShowError(true)
       closeModal()
     }

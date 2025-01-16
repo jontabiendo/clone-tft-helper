@@ -45,7 +45,7 @@ async function fetchMatches(name) {
     }
   })
   const thing = await res.json()
-  // console.log("res: ", thing)
+  console.log("res: ", thing)
   return thing
 }
 
