@@ -17,6 +17,7 @@ const axiosNA1 = axios.create({
 
 router.get('/:summoner', async function(req, res, next) {
   const start = Date.now();
+  console.log('backend request for summoner received...')
 
   const prelim = await getSummonerFromDb(req.params.summoner)
   console.log(prelim)
