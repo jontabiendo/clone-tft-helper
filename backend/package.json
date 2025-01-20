@@ -6,7 +6,7 @@
     "start": "per-env",
     "start:development": "nodemon ./bin/www",
     "start:production": "node ./bin/www",
-    "build": "node --trace-warnings psql-setup-script.js"
+    "build": "node --trace-warnings psql-setup-script.js && npx sequelize db:migrate --prefix db"
   },
   "dependencies": {
     "axios": "^1.7.9",
