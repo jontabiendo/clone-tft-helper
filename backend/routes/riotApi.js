@@ -23,14 +23,19 @@ router.get('/:summoner', async function(req, res, next) {
   console.log(prelim)
 
   if (await prelim) {
-    const resData = await normalizeDbDataForFrontend(prelim.toJSON())
+    const resData = {
+      msg: "pre-existing data found in db",
+      data: await normalizeDbDataForFrontend(prelim.toJSON())}
     res.status(200).send(resData)
     return prelim
   }
 
   const summoner = await getSummonerFromRGAPI(req.params.summoner)
 
-  res.status(200).send(summoner.data)
+  res.status(200).send({
+    msg: "Data found from RGAPI",
+    data: summoner.data
+  })
 
   const backendTime = Date.now()
 
