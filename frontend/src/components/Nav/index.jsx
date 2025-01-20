@@ -25,7 +25,7 @@ function Nav() {
       console.log("Dispatching 'getMatches'")
       const res = await dispatch(getMatches(search))
         .then(e => {
-          console.log(e)
+          console.log("back in anv: ", e)
         dispatch(getMatchesAction(e.payload.matches))
         e.payload.summoner.revisionDate = new Date(e.payload.summoner.revisionDate).toDateString()
         dispatch(setSummoner(e.payload.summoner))
