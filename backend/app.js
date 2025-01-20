@@ -14,8 +14,8 @@ const { environment } = require('./config');
 const isProduction = environment === 'production';
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const riotRouter = require('./routes/riotApi');
+const usersRouter = require('./routes/api/users');
+const riotRouter = require('./routes/api/riotApi');
 // const eagerRankings = require('./routes/test')
 const app = express();
 

@@ -1,9 +1,9 @@
 const express = require('express');
 const axios = require('axios');
-const { normalizeMatchDataById, normalizeRankedData, normalizeDatabaseMatchData, dbCommitStarter, commitMatches, normalizeDbDataForFrontend, getSummonerFromDb, getSummonerFromRGAPI } = require('./helpers');
+const { normalizeMatchDataById, normalizeRankedData, normalizeDatabaseMatchData, dbCommitStarter, commitMatches, normalizeDbDataForFrontend, getSummonerFromDb, getSummonerFromRGAPI } = require('../helpers');
 const router = express.Router();
 
-const { Summoner, NormalRanking, Ranking, DoubleUpRanking, HyperRollRanking, Participant, Match, MatchParticipants, SummonerMatches, sequelize, Trait, Unit, ParticipantTrait, ParticipantUnit } = require('../db/models')
+const { Summoner, NormalRanking, Ranking, DoubleUpRanking, HyperRollRanking, Participant, Match, MatchParticipants, SummonerMatches, sequelize, Trait, Unit, ParticipantTrait, ParticipantUnit } = require('../../db/models')
 
 const axiosAmericas = axios.create({
   baseURL: "https://americas.api.riotgames.com",
