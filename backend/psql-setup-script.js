@@ -1,4 +1,4 @@
-const { db } = require('./db/models');
+const db  = require('./db/models');
 
 db.sequelize.showAllSchemas({ logging: false }).then(async (data) => {
   if (!data.includes(process.env.SCHEMA)) {
