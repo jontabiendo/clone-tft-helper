@@ -44,9 +44,9 @@ async function fetchMatches(name) {
       'Content-Type': 'application/json'
     }
   })
-  console.log("res: ", res)
-  // const thing = await res.json()
-  return await res.json()
+  console.log("res in backend: ", res)
+  const thing = await res.json()
+  return thing
 }
 
 export const getMatches = createAsyncThunk(
