@@ -100,6 +100,8 @@ async function getSummonerFromRGAPI(name) {
 
   summonerInfo.name = name
 
+  console.log('fetching match data for summoner...')
+
   const count = 5;
   const rawMatchList = Array(count);
   const matches = await axiosAmericas.get(`/tft/match/v1/matches/by-puuid/${summonerResolved.puuid}/ids?count=${count}&api_key=${process.env.RIOT_API_KEY}`)
@@ -123,7 +125,7 @@ async function getSummonerFromRGAPI(name) {
     })()
   ])
 
-  console.log(await matches)
+  console.log('matches from RGAPI: ', await matches)
 
   fullInfoList.pop()
     return fullInfoList
