@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Unit.belongsToMany(models.Participant, {
-        through: models.ParticipantUnit
+        through: models.ParticipantUnit,
+        foreignKey: 'unitId'
       })
     }
   }
