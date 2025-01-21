@@ -8,7 +8,7 @@ if(process.env.NODE_ENV === 'production'){
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Matches', {
+    await queryInterface.createTable('matches', {
       id: {
         type: Sequelize.STRING,
         unique: true,
@@ -37,7 +37,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Matches"
+    options.tableName = "matches"
     await queryInterface.dropTable(options);
   }
 };

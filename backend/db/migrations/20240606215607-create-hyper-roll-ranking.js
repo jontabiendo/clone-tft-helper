@@ -8,7 +8,7 @@ if(process.env.NODE_ENV === 'production'){
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('HyperRollRankings', {
+    await queryInterface.createTable('hyperRollRankings', {
       id: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -32,7 +32,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "HyperRollRankings"
+    options.tableName = "hyperRollRankings"
     await queryInterface.dropTable(options);
   }
 };

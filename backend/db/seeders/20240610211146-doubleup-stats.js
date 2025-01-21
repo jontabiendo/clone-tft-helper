@@ -18,7 +18,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   options.tableName = "DoubleUpRankings"
+   options.tableName = "doubleUpRankings"
 
     return queryInterface.bulkInsert(options, [
       {
@@ -53,7 +53,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    options.tableName = "DoubleUpRankings"
-    return queryInterface.bulkDelete("DoubleUpRankings", null, {})
+    options.tableName = "doubleUpRankings"
+    return queryInterface.bulkDelete(options, null, {})
   }
 };

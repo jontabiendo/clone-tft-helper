@@ -18,7 +18,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   options.tableName = "NormalRankings"
+   options.tableName = "normalRankings"
 
    return queryInterface.bulkInsert(options, [
     {
@@ -53,7 +53,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    options.tableName = "NormalRankings"
+    options.tableName = "normalRankings"
     return queryInterface.bulkDelete(options, null, {})
   }
 };

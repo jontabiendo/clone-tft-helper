@@ -19,7 +19,7 @@ module.exports = {
      * }], {});
     */
 
-    
+
   //  return queryInterface.bulkInsert("Participants", [
   //   {
   //     goldLeft: 1,
@@ -121,6 +121,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    return queryInterface.bulkDelete("Participants", null, {})
+    options.tableName = "participants"
+    return queryInterface.bulkDelete(options, null, {})
   }
 };

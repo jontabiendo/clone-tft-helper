@@ -66,7 +66,7 @@ module.exports = {
       allTraits[i] = tierTraits
     }
 
-    options.tableName = "Traits"
+    options.tableName = "traits"
 
     return queryInterface.bulkInsert(options, allTraits.flat(Infinity))
   },
@@ -78,7 +78,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    options.tableName = "Traits"
-    return queryInterface.bulkDelete("Traits", null, {})
+    options.tableName = "traits"
+    return queryInterface.bulkDelete(options, null, {})
   }
 };

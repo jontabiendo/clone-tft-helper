@@ -8,7 +8,7 @@ if(process.env.NODE_ENV === 'production'){
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('NormalRankings', {
+    await queryInterface.createTable('normalRankings', {
       id: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -49,7 +49,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "NormalRankings"
+    options.tableName = "normalRankings"
     await queryInterface.dropTable(options);
   }
 };

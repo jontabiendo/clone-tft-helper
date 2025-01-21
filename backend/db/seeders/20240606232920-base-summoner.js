@@ -18,7 +18,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   options.tableName = "Summoners"
+   options.tableName = "summoners"
    return queryInterface.bulkInsert(options, [
     {
       id: "waters0lid",
@@ -35,7 +35,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    options.tableName = "Summoners"
+    options.tableName = "summoners"
     return queryInterface.bulkDelete(options, null, {})
   }
 };

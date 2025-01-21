@@ -19,7 +19,7 @@ module.exports = {
      * }], {});
     */
 
-    options.tableName = "HyperRollRankings"
+    options.tableName = "hyperRollRankings"
 
     return queryInterface.bulkInsert(options, [
       {
@@ -47,7 +47,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    options.tableName = "HyperRollRankings"
-    return queryInterface.bulkDelete("HyperRollRankings", null, {})
+    options.tableName = "hyperRollRankings"
+    return queryInterface.bulkDelete(options, null, {})
   }
 };
