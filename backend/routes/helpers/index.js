@@ -84,6 +84,8 @@ async function getSummonerFromRGAPI(name) {
   try {
     console.log("fetching from: ", `/riot/account/v1/accounts/by-riot-id/${name}/NA1?api_key=${process.env.RIOT_API_KEY}`)
     summoner = await axiosAmericas.get(`/riot/account/v1/accounts/by-riot-id/${name}/NA1?api_key=${process.env.RIOT_API_KEY}`)
+
+    console.log(summoner.data)
     
   } catch(e) {
     throw new Error("Summoner not found")
