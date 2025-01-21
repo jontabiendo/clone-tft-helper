@@ -96,7 +96,7 @@ async function getSummonerFromRGAPI(name) {
     return e.data
   }
   );
-  // console.log( summonerInfo)
+  console.log( summonerInfo)
 
   summonerInfo.name = name
 
@@ -123,7 +123,7 @@ async function getSummonerFromRGAPI(name) {
     })()
   ])
 
-  // console.log(await matches)
+  console.log(await matches)
 
   fullInfoList.pop()
     return fullInfoList
