@@ -55,8 +55,6 @@ app.use(function (req, res, next) {
 })
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/riot', riotRouter);
 
 const { Op, where } = require('sequelize');
 const { Summoner, NormalRanking, Ranking, DoubleUpRanking, HyperRollRanking, Participant, Match, MatchParticipants, SummonerMatches, sequelize, Trait, Unit, ParticipantTrait, ParticipantUnit } = require('./db/models');

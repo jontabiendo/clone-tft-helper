@@ -1,6 +1,12 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
+
+let options = {};
+if(process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA
+}
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -12,7 +18,9 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('DoubleUpRankings', [
+   options.tableName = "DoubleUpRankings"
+
+    return queryInterface.bulkInsert(options, [
       {
         id: "waters0lid",
         rank: 'SILVER II',
@@ -45,6 +53,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    options.tableName = "DoubleUpRankings"
     return queryInterface.bulkDelete("DoubleUpRankings", null, {})
   }
 };

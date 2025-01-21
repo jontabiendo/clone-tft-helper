@@ -1,6 +1,12 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
+
+let options = {};
+if(process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA
+}
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -60,7 +66,9 @@ module.exports = {
       allTraits[i] = tierTraits
     }
 
-    return queryInterface.bulkInsert("Traits", allTraits.flat(Infinity))
+    options.tableName = "Traits"
+
+    return queryInterface.bulkInsert(options, allTraits.flat(Infinity))
   },
 
   async down (queryInterface, Sequelize) {
@@ -70,6 +78,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    options.tableName = "Traits"
     return queryInterface.bulkDelete("Traits", null, {})
   }
 };

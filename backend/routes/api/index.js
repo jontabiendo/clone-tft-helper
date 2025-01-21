@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const apiRouter = require('./riotApi');
+const riotRouter = require('./riotApi');
 
-router.use('/riot', apiRouter);
+router.use('/riot', riotRouter);
 
 module.exports = router
