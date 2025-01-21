@@ -49,6 +49,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('NormalRankings');
+    options.tableName = "NormalRankings"
+    await queryInterface.dropTable(options);
   }
 };

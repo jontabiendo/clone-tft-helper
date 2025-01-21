@@ -28,6 +28,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('SummonerMatches');
+    options.tableName = "SummonerMatches"
+    await queryInterface.dropTable(options);
   }
 };

@@ -49,6 +49,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('DoubleUpRankings');
+    options.tableName = "DoubleUpRankings"
+    await queryInterface.dropTable(options);
   }
 };

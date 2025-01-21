@@ -49,6 +49,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('participants');
+    options.tableName = "participants"
+    await queryInterface.dropTable(options);
   }
 };

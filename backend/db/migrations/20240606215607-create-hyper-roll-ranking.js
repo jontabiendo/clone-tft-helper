@@ -32,6 +32,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('HyperRollRankings');
+    options.tableName = "HyperRollRankings"
+    await queryInterface.dropTable(options);
   }
 };
