@@ -38,7 +38,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Match',
-    timestamps: false
+    timestamps: false,
+    tableName: "matches"
   });
   return Match;
 };

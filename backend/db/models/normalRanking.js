@@ -42,7 +42,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     sequelize,
     modelName: 'NormalRanking',
-    timestamps: false
+    timestamps: false,
+    tableName: "normalRankings"
   });
   return NormalRanking;
 };

@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Unit',
-    timestamps: false
+    timestamps: false,
+    tableName: 'units'
   });
   return Unit;
 };

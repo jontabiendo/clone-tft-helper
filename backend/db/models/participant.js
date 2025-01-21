@@ -57,7 +57,8 @@ module.exports = (sequelize, DataTypes) => {
           }
         ]
       }
-    }
+    },
+    tableName: 'participants'
   });
   return Participant;
 };

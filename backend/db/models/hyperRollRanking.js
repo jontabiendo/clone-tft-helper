@@ -34,7 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     sequelize,
     modelName: 'HyperRollRanking',
-    timestamps: false
+    timestamps: false,
+    tableName: "hyperRollRankings"
   });
   return HyperRollRanking;
 };

@@ -38,7 +38,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'SummonerMatches',
-    timestamps: false
+    timestamps: false,
+    tableName: 'summonerMatches'
   });
   return SummonerMatches;
 };

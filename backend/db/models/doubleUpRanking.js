@@ -42,7 +42,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     sequelize,
     modelName: 'DoubleUpRanking',
-    timestamps: false
+    timestamps: false,
+    tableName: "doubleUpRankings"
   });
   return DoubleUpRanking;
 };
