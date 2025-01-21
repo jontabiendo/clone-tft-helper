@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       // })
       Match.belongsToMany(models.Summoner, {
         through: models.SummonerMatches,
+        uniqueKey: 'matchId'
       })
     }
   }
