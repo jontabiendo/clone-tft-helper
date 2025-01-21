@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     matchId: {
       type: DataTypes.STRING,
       references: {
-        model: "Matches",
+        model: "Match",
         key: 'id'
       }
     },
