@@ -116,12 +116,15 @@ async function getSummonerFromRGAPI(name) {
         // idx === 0 ? console.log(relevantInfo) : null
         
         rawMatchList[idx] = (res.data)
+        console.log("matchInfo: ", relevantInfo)
 
         return relevantInfo
     }), (async () => {
       const rankedInfo = await axiosNA1.get(`/league/v1/entries/by-summoner/${summonerInfo.id}?api_key=${process.env.RIOT_API_KEY}`)
 
       summonerInfo.rankings = normalizeRankedData(rankedInfo.data)
+
+      console.log(summonerInfo.rankings)
 
       return summonerInfo.rankings
     })()
