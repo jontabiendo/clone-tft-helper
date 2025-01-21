@@ -130,11 +130,11 @@ async function getSummonerFromRGAPI(name) {
     })()
   ])
 
-  console.log('matches from RGAPI: ', await matches)
-
+  
   fullInfoList.pop()
-    return fullInfoList
-  })
+  return fullInfoList
+})
+console.log('matches from RGAPI: ', await matches)
 
   const data = {
     summoner: summonerInfo,
