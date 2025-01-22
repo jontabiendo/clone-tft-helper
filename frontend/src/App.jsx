@@ -11,7 +11,6 @@ import Loading from './components/LoadingModal';
 import { getMatches, reverseMatchesAction, getMatchesAction } from './store/matchesReducer';
 import { setSummoner } from './store/summonerReducer';
 import Nav from './components/Nav';
-import RiotFile from './components/riotFile';
 import raw from './riot.txt'
 
 function App() {
