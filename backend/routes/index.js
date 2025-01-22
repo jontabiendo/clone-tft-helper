@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api')
-const raw = require('./riot.txt')
 
 router.use('/api', apiRouter);
 
