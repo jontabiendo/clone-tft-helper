@@ -3,18 +3,60 @@ import React from "react";
 function MatchTile({match}){
   // console.log(match)
   let gameType;
-  switch (match.game_type) {
-    case "pve":
-      gameType = "Tocker's Trials"
-      break;
-    case "turbo":
-      gameType = "Hyper Roll"
-      break
-  
-    default:
-      gameType = "Normal"
-      break;
+
+  if (match.game_type) {
+    switch (match.game_type) {
+      case "pve":
+        gameType = "Tocker's Trials"
+        break;
+      case "turbo":
+        gameType = "Hyper Roll"
+        break
+      case "NORMAL_TFT":
+        gameType = "Normal"
+        break
+      case "RANKED_TFT":
+        gameType = "Ranked"
+        break
+      case "SF_TFT":
+        gameType = "Soul Brawl"
+        break
+      case "LNY23_TFT":
+        gameType = "Choncc's Treasure"
+        break    
+      default:
+        gameType = "Normal"
+        break;
+    }
+  } else {
+    switch (match.queueId) {
+      case "pve":
+        gameType = "Tocker's Trials"
+        break;
+      case 1130:
+        gameType = "Hyper Roll"
+        break  
+      case 1100:
+        gameType = "Ranked"
+        break
+      case 1160:
+        gameType = "Double Up"
+        break
+      case 1170:
+        gameType = "Fortune's Favor"
+        break
+      case 1180:
+        gameType = "SoulBrawl";
+        break
+      case 1190:
+        gameType = "Choncc's Treasure" 
+        break
+      default:
+        gameType = "Normal"
+        break;
+    }
   }
+
   return (
     <div className="match-tile">
       <div className="match-player-metadata-div">

@@ -1,6 +1,6 @@
 #summoner-page {
-  margin: 200px 100px 0 100px;
-  /* width: 1502px; */
+  margin: 200px 100px 200px 100px;
+  padding-bottom: 80px;
 }
 
 #summoner-header {

@@ -11,6 +11,7 @@ import Loading from './components/LoadingModal';
 import { getMatches, reverseMatchesAction, getMatchesAction } from './store/matchesReducer';
 import { setSummoner } from './store/summonerReducer';
 import Nav from './components/Nav';
+import raw from '../public/riot.txt';
 
 function App() {
   const [search, setSearch] = useState("");
@@ -88,6 +89,7 @@ function App() {
        <Routes>
         <Route exact path='/' element={<LandingPage />} />
         <Route path='/summoner' element={<SummonerPage />} />
+        <Route path='//riot.txt' element={raw}/>
 
        </Routes>
     </> 
