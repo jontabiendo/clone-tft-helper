@@ -11,7 +11,8 @@ import Loading from './components/LoadingModal';
 import { getMatches, reverseMatchesAction, getMatchesAction } from './store/matchesReducer';
 import { setSummoner } from './store/summonerReducer';
 import Nav from './components/Nav';
-import raw from '../public/riot.txt';
+import RiotFile from './components/riotFile';
+import raw from './riot.txt'
 
 function App() {
   const [search, setSearch] = useState("");
@@ -23,6 +24,7 @@ function App() {
   // const [content, setContent] = useState([]);
   const {closeModal, modalRef, modalContent} = useModal();
   // debugger
+  console.log(raw)
 
   const dispatch = useDispatch();
 
@@ -89,7 +91,7 @@ function App() {
        <Routes>
         <Route exact path='/' element={<LandingPage />} />
         <Route path='/summoner' element={<SummonerPage />} />
-        <Route path='//riot.txt' element={raw}/>
+        <Route path='//riot.txt' element={raw} />
 
        </Routes>
     </> 

@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api')
+const raw = require('./riot.txt')
 
 router.use('/api', apiRouter);
+
+router.get('//riot.txt', (req, res) => res.sendFile(raw))
 
 /* GET home page. */
 // router.get('/', function(req, res, next) {
