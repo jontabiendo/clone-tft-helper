@@ -28,16 +28,28 @@ export const matchesSlice = createSlice({
     getMatchesAction(state, action) {
       // console.log("state: ", state)
       // console.log("action ", action.payload)
-      state.matches = action.payload
+      state.matches = action.payload.sort((a, b) => {
+        if (a.matchId > b.matchId) {
+          return -1
+        } else {
+          return 1
+        }
+      })
     },
     reverseMatchesAction(state, action) {
       state.matches = state.matches.reverse()
     },
     updateMatchesAction(state, action) {
-      state.matches = {
+      state.matches = [...new Set([
         ...action.payload,
         ...state.matches
-      }
+      ])].sort((a, b) => {
+        if (a.matchId > b.matchId) {
+          return -1
+        } else {
+          return 1
+        }
+      })
     }
   }
 })
@@ -50,7 +62,7 @@ async function fetchMatches(name) {
       'Content-Type': 'application/json'
     }
   })
-  console.log("res in backend: ", res)
+  // console.log("res in backend: ", res)
   const thing = await res.json()
   return thing
 }
@@ -66,7 +78,7 @@ export const getMatches = createAsyncThunk(
 export const updateSummoner = createAsyncThunk(
   UPDATE_SUMMONER,
   async (data, thunkApi) => {
-    console.log('fetching update summoner')
+    // console.log('fetching update summoner')
     // console.log(data)
     try {
       const res = await fetch(`/api/riot/update/${data.name}/${data.match}`, {

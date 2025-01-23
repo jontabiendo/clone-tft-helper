@@ -10,7 +10,7 @@ function SummonerHeader() {
   const dispatch = useDispatch();
   const summoner = useSelector((state) => state.summoner.summoner)
   const matches = useSelector((state) => state.matches.matches)
-  console.log(matches[0].matchId)
+  // console.log(matches[0].matchId)
 
   const { closeModal } = useModal();
   // summoner = summoner.summoner
@@ -50,8 +50,6 @@ function SummonerHeader() {
           }
         dispatch(setSummoner(e.payload.summoner))
         closeModal()
-
-
       });
     } catch (e) {
       closeModal()
