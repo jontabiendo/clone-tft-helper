@@ -17,21 +17,19 @@ const axiosNA1 = axios.create({
 
 router.get('/:summoner', async function(req, res, next) {
   const start = Date.now();
-  console.log('backend request for summoner received...')
 
   const prelim = await getSummonerFromDb(req.params.summoner)
-  console.log(prelim)
+  // console.log(prelim)
 
   if (await prelim) {
     const resData = await normalizeDbDataForFrontend(prelim.toJSON())
     res.status(200).send(resData)
-    console.log('preexisting data found in db: ', resData)
+    // console.log('preexisting data found in db: ', resData)
     return 
   }
 
   const summoner = await getSummonerFromRGAPI(req.params.summoner)
 
-  console.log("")
 
   res.status(200).send(summoner.data)
 
@@ -39,7 +37,7 @@ router.get('/:summoner', async function(req, res, next) {
 
   const dbData = await Promise.all(summoner.rawMatchList.map( async (match) =>  normalizeDatabaseMatchData(match)))
 
-  console.log(dbData.summoner)
+  // console.log(dbData.summoner)
   dbCommitStarter(summoner.data).then(() => {
     commitMatches(dbData)
   })
@@ -49,19 +47,20 @@ router.get('/:summoner', async function(req, res, next) {
   return 
 })
 
-router.get('/update/:summoner', async function(req, res, next) {
-  // console.log('requesting update summoner')
+router.get('/update/:summoner/:match', async function(req, res, next) {
+  // console.log("updating summoner...")
   try {
-    const summoner = await getSummonerFromRGAPI(req.params.summoner)
-    // console.log(summoner)
+    const summoner = await getSummonerFromRGAPI(req.params.summoner, req.params.match)
   
     res.status(200).send(summoner.data)
 
     const backendTime = Date.now()
 
-    const dbData = await Promise.all(summoner.rawMatchList.map( async (match) =>  normalizeDatabaseMatchData(match)))
+    const rawMatchList = summoner.rawMatchList.filter(match => match !== null)
+
+
+    const dbData = await Promise.all(rawMatchList.map( async (match) =>  normalizeDatabaseMatchData(match)))
   
-    // console.log(data.summoner)
     dbCommitStarter(summoner.data).then(() => {
       commitMatches(dbData)
     })
@@ -70,7 +69,6 @@ router.get('/update/:summoner', async function(req, res, next) {
     
     
   } catch (error) {
-    // console.log(error);
     res.status(400).send("Summoner not found")
   }
 

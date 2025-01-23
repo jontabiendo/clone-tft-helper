@@ -32,6 +32,12 @@ export const matchesSlice = createSlice({
     },
     reverseMatchesAction(state, action) {
       state.matches = state.matches.reverse()
+    },
+    updateMatchesAction(state, action) {
+      state.matches = {
+        ...action.payload,
+        ...state.matches
+      }
     }
   }
 })
@@ -59,24 +65,30 @@ export const getMatches = createAsyncThunk(
 
 export const updateSummoner = createAsyncThunk(
   UPDATE_SUMMONER,
-  async (name, thunkApi) => {
-    // console.log('fetching update summoner')
-    const res = await fetch(`/api/riot/update/${name}`, {
-      method: "GET",
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    const thing = await res.json();
-    // console.log("summoner update: ", thing);
-    return thing
+  async (data, thunkApi) => {
+    console.log('fetching update summoner')
+    // console.log(data)
+    try {
+      const res = await fetch(`/api/riot/update/${data.name}/${data.match}`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      const thing = await res.json();
+      // console.log("summoner update: ", thing);
+      return thing
+      
+    } catch (error) {
+      console.log("error: ", error)
+    }
   }
 )
 
 
 export const { actions, reducer } = matchesSlice;
 
-export const { getMatchesAction, reverseMatchesAction } = actions
+export const { getMatchesAction, reverseMatchesAction, updateMatchesAction } = actions
 
 export default matchesSlice.reducer;

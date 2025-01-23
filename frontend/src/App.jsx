@@ -23,7 +23,6 @@ function App() {
   // const [content, setContent] = useState([]);
   const {closeModal, modalRef, modalContent} = useModal();
   // debugger
-  console.log(raw)
 
   const dispatch = useDispatch();
 

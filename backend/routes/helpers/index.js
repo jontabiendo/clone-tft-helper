@@ -78,19 +78,14 @@ const axiosNA1 = axios.create({
   header: { "Access-Control-Allow_Origin" : "*"}
 })
 
-async function getSummonerFromRGAPI(name) {
+async function getSummonerFromRGAPI(name, prevMatch) {
   let summoner;
   
   try {
-    console.log("fetching from: ", `/riot/account/v1/accounts/by-riot-id/${name}/NA1?api_key=${process.env.RIOT_API_KEY}`)
-    summoner = await axiosAmericas.get(`/riot/account/v1/accounts/by-riot-id/${name}/NA1?api_key=${process.env.RIOT_API_KEY}`)
-
-    console.log(summoner.data)
-    
+    summoner = await axiosAmericas.get(`/riot/account/v1/accounts/by-riot-id/${name}/NA1?api_key=${process.env.RIOT_API_KEY}`)  
   } catch(e) {
     throw new Error("Summoner not found")
   }
-
   
   const summonerResolved = await summoner.data;
 
@@ -98,11 +93,9 @@ async function getSummonerFromRGAPI(name) {
     return e.data
   }
   );
-  console.log( summonerInfo)
+  // console.log( summonerInfo)
 
   summonerInfo.name = name
-
-  console.log('fetching match data for summoner...')
 
   const count = 5;
   const rawMatchList = Array(count);
@@ -110,21 +103,24 @@ async function getSummonerFromRGAPI(name) {
   .then(async e => {
     const fullInfoList = await Promise.all(
       [...e.data.map(async (match, idx) => {
-        const res = await axiosAmericas.get(`/tft/match/v1/matches/${match}?api_key=${process.env.RIOT_API_KEY}`)
-        
-        relevantInfo = normalizeMatchDataById(res.data.info.participants, summonerResolved.puuid, res.data.info.queueId)
-        // idx === 0 ? console.log(relevantInfo) : null
-        
-        rawMatchList[idx] = (res.data)
-        console.log("matchInfo: ", relevantInfo)
-
-        return relevantInfo
+        // console.log(prevMatch, match, prevMatch < match)
+        if(prevMatch < match) {
+          const res = await axiosAmericas.get(`/tft/match/v1/matches/${match}?api_key=${process.env.RIOT_API_KEY}`)
+          
+          relevantInfo = normalizeMatchDataById(res.data.info.participants, summonerResolved.puuid, res.data.info.queueId, res.data.metadata.match_id)
+          
+          rawMatchList[idx] = (res.data)
+          
+          // console.log(relevantInfo)
+          return relevantInfo
+        } else {
+          rawMatchList[idx] = null
+          return "Already found"
+        }
     }), (async () => {
       const rankedInfo = await axiosNA1.get(`/league/v1/entries/by-summoner/${summonerInfo.id}?api_key=${process.env.RIOT_API_KEY}`)
 
       summonerInfo.rankings = normalizeRankedData(rankedInfo.data)
-
-      console.log(summonerInfo.rankings)
 
       return summonerInfo.rankings
     })()
@@ -134,11 +130,17 @@ async function getSummonerFromRGAPI(name) {
   fullInfoList.pop()
   return fullInfoList
 })
-console.log('matches from RGAPI: ', await matches)
+// console.log("matches: ", matches)
+
+const filteredMatches = matches.filter(match => {
+  // console.log(match)
+  return match !== "Already found" 
+})
+console.log("filtered matches: ", filteredMatches)
 
   const data = {
     summoner: summonerInfo,
-    matches: matches
+    matches: filteredMatches
   }
   return {
     data,
@@ -162,7 +164,8 @@ function assignUnitLinks(unitList) {
   return unitList
 }
 
-function normalizeMatchDataById(match, id, queueId){
+function normalizeMatchDataById(match, id, queueId, matchId){
+  // console.log(match)
   relevantInfo = match.filter(player => player.puuid === id)[0]
 
   delete relevantInfo.companion
@@ -202,6 +205,7 @@ function normalizeMatchDataById(match, id, queueId){
   })
 
   relevantInfo['queueId'] = queueId
+  relevantInfo['matchId'] = matchId
 
   return relevantInfo
 }
@@ -502,10 +506,11 @@ async function normalizeDbDataForFrontend(data) {
   // console.log(data)
 
   for (const match of data.Matches) {
-    // console.log("matchParticipants: ", match.MatchParticipants)
+    // console.log("matchParticipants: ", match)
     const newMatch = {
       game_type: match.game_type,
-      tft_set: match.tft_set
+      tft_set: match.tft_set,
+      matchId: match.id
     }
     // console.log(match.MatchParticipants, data.id)
 

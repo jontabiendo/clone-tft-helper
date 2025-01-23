@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/modal";
 import OpenModalButton from "../OpenModalButton";
 import Loading from "../LoadingModal";
-import { getMatches, updateSummoner, getMatchesAction } from "../../store/matchesReducer";
+import { getMatches, updateSummoner, getMatchesAction, updateMatchesAction} from "../../store/matchesReducer";
 import { setSummoner } from "../../store/summonerReducer";
 
 function SummonerHeader() {
   const dispatch = useDispatch();
   const summoner = useSelector((state) => state.summoner.summoner)
+  const matches = useSelector((state) => state.matches.matches)
+  console.log(matches[0].matchId)
 
   const { closeModal } = useModal();
   // summoner = summoner.summoner
@@ -37,10 +39,15 @@ function SummonerHeader() {
     
     try {
       console.log('dispatching update summoner...')
-      const res = await dispatch(updateSummoner(summoner.name))
+      const res = await dispatch(updateSummoner({
+        name: summoner.name, 
+        match: matches[0].matchId}))
         .then(e => {
-        dispatch(getMatchesAction(e.payload.matches))
-        e.payload.summoner.revisionDate = new Date(e.payload.summoner.revisionDate).toDateString()
+          if(e.payload.matches.length) {
+            dispatch(updateMatchesAction(e.payload.matches))
+            e.payload.summoner.revisionDate = new Date(e.payload.summoner.revisionDate).toDateString()
+
+          }
         dispatch(setSummoner(e.payload.summoner))
         closeModal()
 
