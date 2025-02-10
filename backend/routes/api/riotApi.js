@@ -58,6 +58,8 @@ router.get('/update/:summoner/:match', async function(req, res, next) {
 
     const rawMatchList = summoner.rawMatchList.filter(match => match !== null)
 
+    // res.status(200).send()
+
 
     const dbData = await Promise.all(rawMatchList.map( async (match) =>  normalizeDatabaseMatchData(match)))
   

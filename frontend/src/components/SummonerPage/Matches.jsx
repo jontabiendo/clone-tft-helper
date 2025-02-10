@@ -51,6 +51,9 @@ function MatchTile({match}){
       case 1190:
         gameType = "Choncc's Treasure" 
         break
+      case 6100:
+        gameType = "Set Revival 4.5"
+        break
       default:
         gameType = "Normal"
         break;

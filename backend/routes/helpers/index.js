@@ -86,6 +86,7 @@ async function getSummonerFromRGAPI(name, prevMatch) {
   } catch(e) {
     throw new Error("Summoner not found")
   }
+  // console.log("summonerResolved")
   
   const summonerResolved = await summoner.data;
 
@@ -103,8 +104,8 @@ async function getSummonerFromRGAPI(name, prevMatch) {
   .then(async e => {
     const fullInfoList = await Promise.all(
       [...e.data.map(async (match, idx) => {
-        // console.log(prevMatch, match, prevMatch < match)
-        if(prevMatch < match) {
+        console.log(Number(prevMatch.slice(4)) < Number(match.slice(4)))
+        if(Number(prevMatch.slice(4)) < Number(match.slice(4))) {
           const res = await axiosAmericas.get(`/tft/match/v1/matches/${match}?api_key=${process.env.RIOT_API_KEY}`)
           
           relevantInfo = normalizeMatchDataById(res.data.info.participants, summonerResolved.puuid, res.data.info.queueId, res.data.metadata.match_id)
