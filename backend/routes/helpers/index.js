@@ -1,4 +1,5 @@
 const axios = require('axios')
+const sizeof = require('object-sizeof')
 const { newTraits : traitLinks} = require('./traitLinks')
 const { newUnits : unitLinks} = require("./unitLinks")
 const { Op } = require('sequelize')
@@ -10,6 +11,7 @@ async function getSummonerFromDb(name) {
     where: {
       id: name
     },
+    order: [[Match, 'id', 'DESC']],
     include: [
       {
         model: Ranking,
@@ -30,9 +32,7 @@ async function getSummonerFromDb(name) {
         through: {
           attributes: []
         },
-        // order: [
-        //   ['id', 'ASC']
-        // ],
+        // order: [[Match, 'id', 'ASC']],
         include: [
           {
             model: MatchParticipants,
@@ -79,6 +79,18 @@ const axiosNA1 = axios.create({
 })
 
 async function getSummonerFromRGAPI(name, prevMatch) {
+  const preProcData = {
+    summoner: {
+      numRequests: 0,
+      size: 0
+    },
+    ranked: 0,
+    matches: {
+      numRequests: 0,
+      size: 0
+    },
+    total: 0
+  };
   let summoner;
   
   try {
@@ -86,15 +98,20 @@ async function getSummonerFromRGAPI(name, prevMatch) {
   } catch(e) {
     throw new Error("Summoner not found")
   }
-  // console.log("summonerResolved")
   
   const summonerResolved = await summoner.data;
+  preProcData.summoner.numRequests++
+  preProcData.summoner.size = sizeof(summonerResolved)
+  console.log(preProcData)
+  preProcData.total += sizeof(summonerResolved)
 
   const summonerInfo = await axiosNA1.get(`/summoner/v1/summoners/by-puuid/${summonerResolved.puuid}?api_key=${process.env.RIOT_API_KEY}`).then((e) => {
     return e.data
   }
   );
-  // console.log( summonerInfo)
+  preProcData.summoner.numRequests++;
+  preProcData.summoner.size += sizeof(summonerInfo)
+  preProcData.total += sizeof(summonerInfo)
 
   summonerInfo.name = name
 
@@ -102,11 +119,16 @@ async function getSummonerFromRGAPI(name, prevMatch) {
   const rawMatchList = Array(count);
   const matches = await axiosAmericas.get(`/tft/match/v1/matches/by-puuid/${summonerResolved.puuid}/ids?count=${count}&api_key=${process.env.RIOT_API_KEY}`)
   .then(async e => {
+    preProcData.matches.numRequests++
+    preProcData.matches.size += sizeof(e)
     const fullInfoList = await Promise.all(
       [...e.data.map(async (match, idx) => {
-        console.log(Number(prevMatch.slice(4)) < Number(match.slice(4)))
         if(Number(prevMatch.slice(4)) < Number(match.slice(4))) {
           const res = await axiosAmericas.get(`/tft/match/v1/matches/${match}?api_key=${process.env.RIOT_API_KEY}`)
+
+          preProcData.matches.numRequests++
+          preProcData.matches.size += sizeof(res.data)
+          preProcData.total += sizeof(res.data)
           
           relevantInfo = normalizeMatchDataById(res.data.info.participants, summonerResolved.puuid, res.data.info.queueId, res.data.metadata.match_id)
           
@@ -120,6 +142,8 @@ async function getSummonerFromRGAPI(name, prevMatch) {
         }
     }), (async () => {
       const rankedInfo = await axiosNA1.get(`/league/v1/entries/by-summoner/${summonerInfo.id}?api_key=${process.env.RIOT_API_KEY}`)
+      preProcData.ranked = sizeof(rankedInfo.data)
+      preProcData.total += sizeof(rankedInfo.data)
 
       summonerInfo.rankings = normalizeRankedData(rankedInfo.data)
 
@@ -139,14 +163,15 @@ const filteredMatches = matches.filter(match => {
 })
 console.log("filtered matches: ", filteredMatches)
 
-  const data = {
-    summoner: summonerInfo,
-    matches: filteredMatches
-  }
-  return {
-    data,
-    rawMatchList
-  }
+const data = {
+  summoner: summonerInfo,
+  matches: filteredMatches
+}
+return {
+  data,
+  rawMatchList,
+  preProcData
+}
 }
 
 function assignTraitLinks(traitsList) {
@@ -377,13 +402,21 @@ async function commitUnit(unit, participantId) {
     return
   }
   
-    const unitEntry = await Unit.findOne({
+    const [unitEntry, created] = await Unit.findOrCreate({
       where: {
+        name: unit.character_id.toLowerCase(),
+        rarity: unit.rarity,
+        tier: unit.tier
+      },
+      defaults: {
         name: unit.character_id.toLowerCase(),
         rarity: unit.rarity,
         tier: unit.tier
       }
     })
+    if (created) {
+      await unitEntry.save()
+    }
     const newUnitEntry = await ParticipantUnit.create({
       participantId: participantId,
       unitId: await unitEntry.id

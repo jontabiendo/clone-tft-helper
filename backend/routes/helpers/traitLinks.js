@@ -49,7 +49,28 @@ const traits = {
   "TFT13_MissMageTrait": "https://cdn.lolchess.gg/upload/images/traits/BanishedMage_black_1732695186-banishedmage.svg",
   "TFT13_MachineHerald": "https://cdn.lolchess.gg/upload/images/traits/MachineHerald_black_1732695097-machineherald.svg",
   "tft13_teamup_sisters": "https://cdn.lolchess.gg/upload/images/traits/Sisters_black_1731912487-Sisters.svg",
-  "tft13_teamup_menaces": "https://cdn.lolchess.gg/upload/images/traits/Menaces_black_1731912471-Menaces.svg"
+  "tft13_teamup_menaces": "https://cdn.lolchess.gg/upload/images/traits/Menaces_black_1731912471-Menaces.svg",
+  "TFT4_Daredevil": "https://cdn.lolchess.gg/upload/images/traits/Set4Daredevil_black_1736747421-Daredevil.svg",
+  "TFT4_Blacksmith": "https://cdn.lolchess.gg/upload/images/traits/Set4Blacksmith_black_1736747741-Blacksmith.svg",
+  "TFT4_Sharpshooter": "https://cdn.lolchess.gg/upload/images/traits/Set4Sharpshooter_black_1736747759-Sharpshooter.svg",
+  "TFT4_Dragonsoul": "https://cdn.lolchess.gg/upload/images/traits/Set4Dragonsoul_black_1736747500-Dragonsoul.svg",
+  "TFT4_Vanguard": "https://cdn.lolchess.gg/upload/images/traits/Set4Vanguard_black_1736747774-Vanguard.svg",
+  "TFT4_Mystic": "https://cdn.lolchess.gg/upload/images/traits/Set4Mystic_black_1736747791-Mystic.svg",
+  "TFT4_Spirit": "https://cdn.lolchess.gg/upload/images/traits/Set4Spirit_black_1736747482-Spirit.svg",
+  "TFT4_Assassin": "https://cdn.lolchess.gg/upload/images/traits/Set4Assassin_black_1736747823-Assassin.svg",
+  "TFT4_Slayer": "https://cdn.lolchess.gg/upload/images/traits/Set4Slayer_black_1736747899-Slayer.svg",
+  "TFT4_Emperor": "https://cdn.lolchess.gg/upload/images/traits/Set4Emperor_black_1736747919-Emperor.svg",
+  "TFT4_Warlord": "https://cdn.lolchess.gg/upload/images/traits/Set4Warlord_black_1736747404-Warlord.svg",
+  "TFT4_Cultist": "https://cdn.lolchess.gg/upload/images/traits/Set4Cultist_black_1736747331-Cultist.svg",
+  "TFT4_Duelist": "https://cdn.lolchess.gg/upload/images/traits/Set4Duelist_black_1736748048-Duelist.svg",
+  "TFT4_Keeper": "https://cdn.lolchess.gg/upload/images/traits/Set4Keeper_black_1736747725-Keeper.svg",
+  "TFT4_Divine": "https://cdn.lolchess.gg/upload/images/traits/Set4Divine_black_1736747463-Divine.svg",
+  "TFT4_Adept": "https://cdn.lolchess.gg/upload/images/traits/Set4Adept_black_1736747863-Adept.svg",
+  "TFT4_Enlightened": "https://cdn.lolchess.gg/upload/images/traits/Set4Enlightened_black_1736747436-Enlightened.svg",
+  "TFT4_Executioner": "https://cdn.lolchess.gg/upload/images/traits/Set4Executioner_black_1736747881-Executioner.svg",
+  "TFT4_Ninja": "https://cdn.lolchess.gg/upload/images/traits/Set4Ninja_black_1736747387-Ninja.svg",
+  "TFT4_Syphoner": "https://cdn.lolchess.gg/upload/images/traits/Set4Syphoner_black_1736747968-Syphoner.svg",
+  "TFT4_Dragonsoul": "https://cdn.lolchess.gg/upload/images/traits/Set4Dragonsoul_black_1736747500-Dragonsoul.svg"
 }
 
 let newTraits = {}

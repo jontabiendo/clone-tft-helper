@@ -52,7 +52,10 @@ router.get('/update/:summoner/:match', async function(req, res, next) {
   try {
     const summoner = await getSummonerFromRGAPI(req.params.summoner, req.params.match)
   
-    res.status(200).send(summoner.data)
+    res.status(200).send({
+      data: summoner.data,
+      preProcData: summoner.preProcData
+    })
 
     const backendTime = Date.now()
 

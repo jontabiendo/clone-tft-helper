@@ -89,8 +89,8 @@ export const updateSummoner = createAsyncThunk(
       });
   
       const thing = await res.json();
-      // console.log("summoner update: ", thing);
-      return thing
+      console.log("kilobytes: ", thing.preProcData.total / 1000);
+      return thing.data
       
     } catch (error) {
       console.log("error: ", error)

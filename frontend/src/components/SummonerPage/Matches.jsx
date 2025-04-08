@@ -97,7 +97,7 @@ function MatchTile({match}){
 }
 
 function Matches({matches}) {
-  console.log(matches)
+  // console.log(matches)
 
   return (
     <div id="matches-div">
